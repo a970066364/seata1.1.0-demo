@@ -1,0 +1,58 @@
+
+- # seata-demo
+- 
+- #### 介绍
+- seata1.1.0版本
+- spring-cloud-alibaba-seata 
+- spring-cloud-alibaba-nacos
+- spring-cloud-openfeign
+- mybatis-plus-boot
+- 
+-  
+- #sql文件是拿的官方例子，为了方便而已。
+- 
+- 
+- #seata1.1.0下载地址
+- https://github.com/seata/seata/releases/tag/v1.1.0 
+- 
+- #seata1.1.0/conf/file.conf 
+- service {
+-   vgroupMapping.tx_tison_group="default"
+-   default.grouplist = "127.0.0.1:8091"
+-   enableDegrade = false
+-   disableGlobalTransaction = false
+- }
+-
+-
+- #seata1.1.0/conf/registry.conf 
+- registry {
+-   type = "file"
+-   file {
+-     name = "file.conf"
+-   }
+- }
+- 
+- config {
+-   type = "file"
+-   file {
+-     name = "file.conf"
+-   }
+- }
+- 
+- #源码工程部分，自行修改nacos的服务地址及DB信息
+- application.properties
+- bootstrap.properties
+- 
+- #正常跑起来的，测试接口，模拟下订单去扣库存
+- http://127.0.0.1:15002/api/v1/order/test?num=1
+- 
+- 
+-  //当库存为偶数则会异常，为了掩饰异常，让分布式事务回衮
+-     if (storageTbl.getCount()%2==0){
+-       int a = 1/0;
+-     }
+- 
+- 
+- 
+- 
+- 
